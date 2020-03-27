@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boston Code Camp</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        <h1><a href="./index.html">Boston Code Camp</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li class="page-link"><a href="./index.html">Home</a></li>
+        <li class="page-link"><a href="./presenter.html">Presenters</a></li>
+        <li class="page-link"><a href="./room.html">Rooms</a></li>
+        <li class="page-link"><a href="./session.html">Sessions</a></li>
+      </ul>
+
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+
+    <div class="presenter-container">
+      <div class="presenter-nav">
+        <div>
+          <h2>Presenters</h2>
+        </div>
+
+        <div class="presenter-controls">
+          <button id="add-presenter" class="btn" onclick="openForm()">
+            Add Presenter
+          </button>
+        </div>
+      </div>
+
+      <div id="presenter-list"></div>
+    </div>
+
+    <div class="form" id="presenterForm">
+      <h3>Add Presenter</h3>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Name</b></label>
+          <input
+            id="name-input"
+            type="text"
+            placeholder="Enter Presenter Name"
+            name="Name"
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Email</b></label>
+          <input
+            id="email-input"
+            type="email"
+            placeholder="example@email.com"
+            name="Email"
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Phone</b></label>
+          <input
+            id="phone-input"
+            type="tel"
+            placeholder="XXX-XXX-XXXX"
+            name="Phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          />
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn cancel" onclick="closeForm()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save" onclick="addPresenter()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./slide-nav.js"></script>
+    <script src="presenter.js"></script>
+  </body>
+</html>

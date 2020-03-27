@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgb(235, 235, 235);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(74, 116, 230);
+}
+
+.btn {
+  padding: 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.cancel {
+  background-color: red;
+  border-color: red;
+}
+
+.cancel:hover {
+  background-color: rgb(255, 52, 52);
+  border-color: rgb(255, 52, 52);
+}
+
+.save {
+  background-color: rgb(16, 163, 16);
+  border-color: rgb(16, 163, 16);
+}
+
+.save:hover {
+  background-color: rgb(76, 202, 76);
+  border-color: rgb(76, 202, 76);
+}
+
+.btn:hover {
+  color: rgb(255, 255, 255);
+  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.788);
+}
+
+a {
+  text-decoration: none;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+/********************************************/
+/*************** NAVIGATION *****************/
+/********************************************/
+
+.logo {
+  z-index: 1;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 7vh;
+  padding: 20px;
+  width: 100%;
+  background-color: rgb(74, 116, 230);
+  z-index: 1;
+}
+
+/********************************************/
+/****************** FORM ********************/
+/********************************************/
+
+.form {
+  border-radius: 5px;
+  margin: 0px 10% 50px 10%;
+}
+
+.input-container {
+  padding: 10px;
+}
+
+.form-input {
+  padding-bottom: 20px;
+}
+.form-input select {
+  color: black;
+  border-radius: none;
+  height: 23px;
+  width: 100%;
+}
+
+.form-input input {
+  padding: 4px;
+  color: black;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.submit-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.form-submit button {
+  width: 75px;
+  margin-right: 10px;
+}

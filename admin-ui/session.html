@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boston Code Camp</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        <h1><a href="./index.html">Boston Code Camp</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li class="page-link"><a href="./index.html">Home</a></li>
+        <li class="page-link"><a href="./presenter.html">Presenters</a></li>
+        <li class="page-link"><a href="./room.html">Rooms</a></li>
+        <li class="page-link"><a href="./session.html">Sessions</a></li>
+      </ul>
+
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+
+    <div class="session-container">
+      <div class="session-nav">
+        <div>
+          <h2>Sessions</h2>
+        </div>
+
+        <div class="session-control">
+          <button id="add-session" class="btn" onclick="openForm()">
+            Add Session
+          </button>
+        </div>
+      </div>
+
+      <div id="session-list"></div>
+    </div>
+
+    <div class="form" id="sessionForm">
+      <h3>Add Session</h3>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Session Name</b></label>
+          <input
+            id="session-input"
+            type="text"
+            placeholder="Enter Session Name"
+            name="session"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Start Time</b></label>
+          <input
+            id="start-time"
+            class="time-box"
+            type="time"
+            name="Start Time"
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>End Time</b></label>
+          <input id="end-time" class="time-box" type="time" name="End Time" />
+        </div>
+
+        <div class="form-input">
+          <label><b>Select Presenter</b></label>
+          <select id="presenter-select" name="presenters">
+            <option value="" selected disabled hidden
+              >Choose a presenter</option
+            >
+            <option value="John Doe">John Doe</option>
+            <option value="Jen Appleseed">Jen Appleseed</option>
+          </select>
+        </div>
+
+        <div class="form-input">
+          <label><b>Select Room</b></label>
+          <select id="room-select" name="rooms">
+            <option value="" selected disabled hidden>Choose a room</option>
+            <option value="2">Room 2</option>
+            <option value="3">Room 3</option>
+          </select>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn cancel" onclick="closeForm()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save" onclick="addSession()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./slide-nav.js"></script>
+    <script src="./session.js"></script>
+  </body>
+</html>

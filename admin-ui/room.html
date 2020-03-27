@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boston Code Camp</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        <h1><a href="./index.html">Boston Code Camp</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li class="page-link"><a href="./index.html">Home</a></li>
+        <li class="page-link"><a href="./presenter.html">Presenters</a></li>
+        <li class="page-link"><a href="./room.html">Rooms</a></li>
+        <li class="page-link"><a href="./session.html">Sessions</a></li>
+      </ul>
+
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+
+    <div class="room-container">
+      <div class="rooms-nav">
+        <div>
+          <h2>Rooms</h2>
+        </div>
+
+        <div class="rooms-control">
+          <button id="add-room" class="btn" onclick="openForm()">
+            Add Room
+          </button>
+        </div>
+      </div>
+
+      <div id="room-list"></div>
+    </div>
+
+    <div class="form" id="roomForm">
+      <h3>Add Room</h3>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Room Number</b></label>
+          <input
+            id="room-input"
+            type="number"
+            placeholder="Enter Room Number"
+            name="Room-Number"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Capacity</b></label>
+          <input
+            id="capacity-input"
+            type="number"
+            placeholder="Enter Room Capacity"
+            name="Capacity"
+          />
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn cancel" onclick="closeForm()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save" onclick="addRoom()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./slide-nav.js"></script>
+    <script src="room.js"></script>
+  </body>
+</html>
