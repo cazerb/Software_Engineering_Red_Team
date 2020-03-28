@@ -11,7 +11,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body>
@@ -72,17 +72,24 @@
             class="time-box"
             type="time"
             name="Start Time"
+            required
           />
         </div>
 
         <div class="form-input">
           <label><b>End Time</b></label>
-          <input id="end-time" class="time-box" type="time" name="End Time" />
+          <input
+            id="end-time"
+            class="time-box"
+            type="time"
+            name="End Time"
+            required
+          />
         </div>
 
         <div class="form-input">
           <label><b>Select Presenter</b></label>
-          <select id="presenter-select" name="presenters">
+          <select id="presenter-select" name="presenters" required>
             <option value="" selected disabled hidden
               >Choose a presenter</option
             >
@@ -93,7 +100,7 @@
 
         <div class="form-input">
           <label><b>Select Room</b></label>
-          <select id="room-select" name="rooms">
+          <select id="room-select" name="rooms" required>
             <option value="" selected disabled hidden>Choose a room</option>
             <option value="2">Room 2</option>
             <option value="3">Room 3</option>
@@ -104,7 +111,7 @@
           <button type="submit" class="btn cancel" onclick="closeForm()">
             Cancel
           </button>
-          <button type="submit" class="btn save" onclick="addSession()">
+          <button type="submit" class="btn save">
             Save
           </button>
         </div>
