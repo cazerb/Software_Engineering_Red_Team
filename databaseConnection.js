@@ -1,10 +1,14 @@
+
+//query('INSERT INTO rooms(roomNumber,capacity) VALUES(' + 1 + ',' + 2 + ')');
+
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  host: "database1.c8lplhzedax4.us-east-1.rds.amazonaws.com",
-  user: "admin",
-  password: "admin123",
-  port: "3306"
+  host: "localhost",
+  user: "root",
+  password: "",
+  port: "3306",
+  database: "test"
 });
 
 connection.connect(function(err) {
@@ -16,4 +20,10 @@ connection.connect(function(err) {
   console.log("Connected to database.");
 });
 
+
+
 module.exports = connection;
+
+
+
+

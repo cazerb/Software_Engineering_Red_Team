@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boston Code Camp</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="/public/admin/room.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="/public/admin/adminStyle.css" />
+  </head>
+
+  <body>
+    <nav style="background-color: rgb(74, 116, 230, 0);">
+      <div class="logo">
+        <h1><a href="/">Boston Code Camp</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li class="page-link"><a href="/">Home</a></li>
+        <li class="page-link"><a href="/presenter">Presenters</a></li>
+        <li class="page-link"><a href="/room">Rooms</a></li>
+        <li class="page-link"><a href="/session">Sessions</a></li>
+      </ul>
+
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+
+    <div class="home-container">
+      <div class="greeting">
+        <h1>Welcome</h1>
+        <span>Boston Code Camp Counter</span>
+      </div>
+    </div>
+
+    <div class="options-container">
+      <div class="column">
+        <a href="/room">
+          <div>
+            <p>Rooms</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column">
+        <a href="/presenter">
+          <div>
+            <p>Presenters</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="column">
+        <a href="/session">
+          <div>
+            <p>Sessions</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <script src="/public/admin/slide-nav.js"></script>
+  </body>
+</html>

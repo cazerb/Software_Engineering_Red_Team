@@ -2,15 +2,32 @@ const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysqlConnection = require("./databaseConnection");
-
-const app = express();
-app.use(bodyParser.json());
+const handler = require("./public/global/requestHandler");
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "count-ui")));
-app.use("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "count-ui", "index.html"));
-  res.sendFile(path.join(__dirname, "count-ui", "style.css"));
+const app = express();
+
+app.use(bodyParser.json());
+app.use('/public', express.static('public'));
+
+app.use('/roomHandler', handler);
+app.use('/myaction', handler);
+app.use('/myaction', handler);
+
+//get all admin UI
+app.get("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/public/admin/index.html"));
 });
+app.get("/room", (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/public/admin/room.html"));
+});
+app.get("/session", (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/public/admin/session.html"));
+});     
+app.get("/presenter", (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/public/admin/presenter.html"));
+});
+
+
 
 app.listen(3000);
