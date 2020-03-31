@@ -11,8 +11,6 @@ app.use(bodyParser.json());
 app.use('/public', express.static('public'));
 
 app.use('/roomHandler', handler);
-app.use('/myaction', handler);
-app.use('/myaction', handler);
 
 //get all admin UI
 app.get("/", (req, res, next) => {
