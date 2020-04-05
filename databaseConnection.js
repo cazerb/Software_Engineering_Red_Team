@@ -1,6 +1,3 @@
-
-//query('INSERT INTO rooms(roomNumber,capacity) VALUES(' + 1 + ',' + 2 + ')');
-
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -19,8 +16,6 @@ connection.connect(function(err) {
 
   console.log("Connected to database.");
 });
-
-
 
 module.exports = connection;
 

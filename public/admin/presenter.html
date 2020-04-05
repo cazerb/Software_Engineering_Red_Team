@@ -50,7 +50,7 @@
       <div id="presenter-list"></div>
     </div>
 
-    <form class="form" id="presenterForm">
+    <form class="form" id="presenterForm" onsubmit="submitPresenter()">
       <h3>Add Presenter</h3>
 
       <div class="form-container">
@@ -83,8 +83,7 @@
             type="tel"
             placeholder="XXX-XXX-XXXX"
             name="Phone"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            required
+            pattern="[0-9]{3} [0-9]{3} [0-9]{4}|[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}"
           />
         </div>
 
@@ -99,7 +98,8 @@
       </div>
     </form>
 
+    <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
     <script src="/public/admin/slide-nav.js"></script>
-    <script src="/public/admin/presenter.js"></script>
+    <script type="text/javascript" src="/public/admin/presenter.js"></script>
   </body>
 </html>
