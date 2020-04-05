@@ -26,6 +26,17 @@ for (i = 0; i < close.length; i++) {
 }
 
 // Session Form
+function submitSession() {
+  var jsonOBJ = {
+    sessionName: document.getElementById("session-input").value,
+    startTime: document.getElementById("start-time").value,
+    endTime: document.getElementById("end-time").value,
+    presenter: document.getElementById("presenter-select").value,
+    room: document.getElementById("room-select").value
+  }
+  testMe(jsonOBJ,"/sessionHandler/insert");
+}
+
 function openForm() {
   document.getElementById("sessionForm").style.display = "block";
 }

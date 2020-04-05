@@ -50,7 +50,7 @@
       <div id="session-list"></div>
     </div>
 
-    <form class="form" id="sessionForm">
+    <form class="form" id="sessionForm" onsubmit="submitSession()">
       <h3>Add Session</h3>
 
       <div class="form-container">
@@ -72,7 +72,6 @@
             class="time-box"
             type="time"
             name="Start Time"
-            required
           />
         </div>
 
@@ -83,13 +82,12 @@
             class="time-box"
             type="time"
             name="End Time"
-            required
           />
         </div>
 
         <div class="form-input">
           <label><b>Select Presenter</b></label>
-          <select id="presenter-select" name="presenters" required>
+          <select id="presenter-select" name="presenters">
             <option value="" selected disabled hidden
               >Choose a presenter</option
             >
@@ -100,7 +98,7 @@
 
         <div class="form-input">
           <label><b>Select Room</b></label>
-          <select id="room-select" name="rooms" required>
+          <select id="room-select" name="rooms">
             <option value="" selected disabled hidden>Choose a room</option>
             <option value="2">Room 2</option>
             <option value="3">Room 3</option>
@@ -118,7 +116,8 @@
       </div>
     </form>
 
+    <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
     <script src="/public/admin/slide-nav.js"></script>
-    <script src="/public/admin/session.js"></script>
+    <script type="text/javascript" src="/public/admin/session.js"></script>
   </body>
 </html>

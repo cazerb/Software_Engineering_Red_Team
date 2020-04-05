@@ -25,6 +25,15 @@ for (i = 0; i < close.length; i++) {
   };
 }
 
+function submitPresenter() {
+  var jsonOBJ = {
+    name: document.getElementById("name-input").value,
+    email: document.getElementById("email-input").value,
+    phone: document.getElementById("phone-input").value
+  }
+  testMe(jsonOBJ,"/presenterHandler/insert");
+}
+
 // Presenter Form
 function openForm() {
   document.getElementById("presenterForm").style.display = "block";

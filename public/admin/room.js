@@ -1,3 +1,5 @@
+//var testing = import("./publicHeader.js");
+
 // Room Items
 var roomItems = document.getElementsByClassName("room-item");
 var i;
@@ -25,23 +27,14 @@ for (i = 0; i < close.length; i++) {
   };
 }
 
-
 // Room Form
 function submitRoom() {
   var jsonOBJ = {
     roomNumber: document.getElementById("room-input").value,
     capacity: document.getElementById("capacity-input").value
   }
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/roomHandler', true);
-  xhr.setRequestHeader("Content-Type", "application/json");
 
-  xhr.onreadystatechange = function() { // Call a function when the state changes.
-      if (this.readyState === 4 && this.status === 200) {
-          // Request finished. Do processing here.
-      }
-  }
-  xhr.send(JSON.stringify(jsonOBJ));
+  testMe(jsonOBJ,"/roomHandler/insert");
 }
 
 function openForm() {

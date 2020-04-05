@@ -2,15 +2,20 @@ const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysqlConnection = require("./databaseConnection");
-const handler = require("./public/global/requestHandler");
 const path = require("path");
+
+const presenterHandler = require("./public/requestHandlers/presenterHandler");
+const roomHandler = require("./public/requestHandlers/roomHandler");
+const sessionHandler = require("./public/requestHandlers/sessionHandler");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use('/public', express.static('public'));
 
-app.use('/roomHandler', handler);
+app.use('/presenterHandler', presenterHandler);
+app.use('/roomHandler', roomHandler);
+app.use('/sessionHandler', sessionHandler);
 
 //get all admin UI
 app.get("/", (req, res, next) => {
@@ -25,7 +30,5 @@ app.get("/session", (req, res, next) => {
 app.get("/presenter", (req, res, next) => {
   res.sendFile(path.join(__dirname + "/public/admin/presenter.html"));
 });
-
-
 
 app.listen(3000);
