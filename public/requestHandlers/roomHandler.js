@@ -13,7 +13,8 @@ router.post('/insert', function(req, res) {
     }
     
     var roomNumber = holdOBJ.roomNumber;
-    capacity = holdOBJ.capacity;
+        capacity = holdOBJ.capacity;
+        
     sql.query(`INSERT INTO rooms(roomNumber,capacity) VALUES(${roomNumber},${capacity})`);
 });
 

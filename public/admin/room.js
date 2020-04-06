@@ -1,5 +1,3 @@
-//var testing = import("./publicHeader.js");
-
 // Room Items
 var roomItems = document.getElementsByClassName("room-item");
 var i;
@@ -27,14 +25,14 @@ for (i = 0; i < close.length; i++) {
   };
 }
 
-// Room Form
+// Submit Room Form
 function submitRoom() {
   var jsonOBJ = {
     roomNumber: document.getElementById("room-input").value,
     capacity: document.getElementById("capacity-input").value
   }
 
-  testMe(jsonOBJ,"/roomHandler/insert");
+  sendPostRequest(jsonOBJ,"/roomHandler/insert");
 }
 
 function openForm() {

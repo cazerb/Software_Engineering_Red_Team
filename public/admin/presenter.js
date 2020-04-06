@@ -31,7 +31,8 @@ function submitPresenter() {
     email: document.getElementById("email-input").value,
     phone: document.getElementById("phone-input").value
   }
-  testMe(jsonOBJ,"/presenterHandler/insert");
+  
+  sendPostRequest(jsonOBJ,"/presenterHandler/insert");
 }
 
 // Presenter Form

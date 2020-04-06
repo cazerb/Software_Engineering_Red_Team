@@ -13,8 +13,8 @@ router.post('/insert', function(req, res) {
     }
 
     var name = holdOBJ.name;
-    email = holdOBJ.email;
-    phone = holdOBJ.phone;
+        email = holdOBJ.email;
+        phone = holdOBJ.phone;
 
   sql.query(`INSERT INTO presenter(name,email,phone) VALUES("${name}","${email}","${phone}")`);
 });
