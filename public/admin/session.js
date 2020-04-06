@@ -34,7 +34,9 @@ function submitSession() {
     presenter: document.getElementById("presenter-select").value,
     room: document.getElementById("room-select").value
   }
-  testMe(jsonOBJ,"/sessionHandler/insert");
+
+  sendPostRequest(jsonOBJ,"/sessionHandler/insert");
+
 }
 
 function openForm() {

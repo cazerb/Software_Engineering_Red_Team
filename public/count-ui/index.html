@@ -11,7 +11,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="/countPublic/countStyle.css" />
+    <link rel="stylesheet" href="/public/count-ui/style.css" />
   </head>
 
   <body>
@@ -34,6 +34,7 @@
           </select>
         </div>
 
+        <!--
         <div class="form-input">
           <label><b>Select Count Time</b></label>
           <select id="count-select" name="session" required>
@@ -42,18 +43,40 @@
             <option value="2">Middle</option>
             <option value="3">End</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="form-input">
-          <label><b>Number of People</b></label>
+          <label><b>Starting Count</b></label>
           <input
-            id="count-input"
+            id="start-count"
             type="number"
-            placeholder="Enter count"
-            name="count"
+            placeholder="Enter starting count"
+            name="startCount"
             required
           />
         </div>
+
+        <div class="form-input">
+            <label><b>Middle Count</b></label>
+            <input
+              id="middle-count"
+              type="number"
+              placeholder="Enter middle count"
+              name="middleCount"
+              required
+            />
+          </div>
+
+          <div class="form-input">
+            <label><b>Ending Count</b></label>
+            <input
+              id="end-count"
+              type="number"
+              placeholder="Enter ending count"
+              name="endCount"
+              required
+            />
+          </div>
 
         <div class="form-input">
           <label><b>Password</b></label>
@@ -62,7 +85,6 @@
             type="password"
             placeholder="Enter password"
             name="password"
-            required
           />
         </div>
       </div>
@@ -76,6 +98,7 @@
       </div>
     </form>
 
-    <script src="/countPublic/app.js"></script>
+    <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
+    <script type="text/javascript" src="/public/count-ui/app.js"></script>
   </body>
 </html>

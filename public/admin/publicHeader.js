@@ -1,4 +1,4 @@
-function testMe(jsonOBJ,handler) {
+function sendPostRequest(jsonOBJ,handler) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', handler, true);
     xhr.setRequestHeader("Content-Type", "application/json");
