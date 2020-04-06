@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2020 at 07:49 PM
+-- Generation Time: Apr 06, 2020 at 08:30 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -40,7 +40,7 @@ CREATE TABLE `presenter` (
 --
 
 INSERT INTO `presenter` (`presenterID`, `name`, `email`, `phone`) VALUES
-(18, 'John Doe', 'Jdoe@test.com', 'null');
+(1, 'John Doe', 'jdoe@gmail.com', 'null');
 
 -- --------------------------------------------------------
 
@@ -59,9 +59,6 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`roomID`, `roomNumber`, `capacity`) VALUES
-(194, 123, NULL),
-(195, 456, 456),
-(196, 999, NULL),
 (197, 2, 45);
 
 -- --------------------------------------------------------
@@ -76,16 +73,18 @@ CREATE TABLE `sessions` (
   `startTime` time DEFAULT NULL,
   `endTime` time DEFAULT NULL,
   `roomID` int(11) DEFAULT NULL,
-  `presenterID` int(11) DEFAULT NULL
+  `presenterID` int(11) DEFAULT NULL,
+  `startCount` int(5) DEFAULT NULL,
+  `middleCount` int(5) DEFAULT NULL,
+  `endCount` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sessions`
 --
 
-INSERT INTO `sessions` (`sessionID`, `sessionName`, `startTime`, `endTime`, `roomID`, `presenterID`) VALUES
-(5, 'Test null session', '00:00:00', '00:00:00', NULL, NULL),
-(6, 'test', '00:00:00', '00:00:00', 197, NULL);
+INSERT INTO `sessions` (`sessionID`, `sessionName`, `startTime`, `endTime`, `roomID`, `presenterID`, `startCount`, `middleCount`, `endCount`) VALUES
+(11, 'Test Driven Development', '00:00:00', '00:00:00', 197, 18, 9, 8, 7);
 
 --
 -- Indexes for dumped tables
@@ -108,6 +107,7 @@ ALTER TABLE `rooms`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`sessionID`),
+  ADD UNIQUE KEY `sessionName` (`sessionName`),
   ADD KEY `roomID` (`roomID`),
   ADD KEY `presenterID` (`presenterID`);
 
@@ -119,19 +119,19 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `presenter`
 --
 ALTER TABLE `presenter`
-  MODIFY `presenterID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `presenterID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `roomID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `roomID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `sessionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sessionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
