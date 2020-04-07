@@ -24,7 +24,13 @@ router.post('/insert', function(req, res) {
             console.log("THE SESSION NAME ALREADY EXISTS");
         }
     });
+});
 
+router.get('/query', function(req, res) {
+    sql.query("SELECT * FROM sessions", function(err,result,fields) {
+        String(result);
+        res.send(result);
+    })
 });
 
 module.exports = router;

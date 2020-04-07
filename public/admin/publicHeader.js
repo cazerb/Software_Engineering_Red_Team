@@ -10,4 +10,3 @@ function sendPostRequest(jsonOBJ,handler) {
     }
     xhr.send(JSON.stringify(jsonOBJ));
 }
-
