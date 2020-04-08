@@ -141,8 +141,8 @@ ALTER TABLE `sessions`
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`roomID`) REFERENCES `rooms` (`roomID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `sessions_ibfk_2` FOREIGN KEY (`presenterID`) REFERENCES `presenter` (`presenterID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`roomID`) REFERENCES `rooms` (`roomID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `sessions_ibfk_2` FOREIGN KEY (`presenterID`) REFERENCES `presenter` (`presenterID`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -10,5 +10,3 @@ function addCount() {
 
     sendPostRequest(jsonOBJ,"/countHandler/insertCounts");
 }
-
-

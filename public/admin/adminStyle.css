@@ -530,12 +530,12 @@ nav {
   margin-right: 10px;
   color: black;
   border-radius: none;
-  width: 138px;
+  width: 145px;
   height: 23px;
 }
 
 .form-input input {
-  width: 138px;
+  width: 145px;
   padding: 4px;
   float: right;
   margin-right: 10px;
@@ -544,7 +544,7 @@ nav {
 }
 
 .time-box {
-  width: 138px;
+  width: 145px;
   height: 23px;
 }
 

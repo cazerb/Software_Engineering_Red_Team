@@ -20,11 +20,27 @@ router.post('/insert', function(req, res) {
     
     sql.query(`INSERT INTO sessions(sessionName,startTime,endTime,roomID,presenterID) VALUES("${sessionName}","${startTime}",
     "${endTime}",(SELECT roomID FROM rooms WHERE roomNumber = ${room}),(SELECT presenterID FROM presenter WHERE name = "${presenter}"))`, function (error, results, fields) {
-        if(error.code == "ER_DUP_ENTRY"){
-            console.log("THE SESSION NAME ALREADY EXISTS");
+        if (error !== null) {
+            if(error.code == "ER_DUP_ENTRY"){
+                console.log("THE SESSION NAME ALREADY EXISTS");
+            }
         }
     });
 });
+
+router.post('/delete', function(req, res) {
+    var holdOBJ = req.body;
+    
+    //if any values are empty, set them to null
+    for (var key in holdOBJ){
+        if (holdOBJ[key] == '')
+            holdOBJ[key] = null;
+    }
+    
+    var sessionName = holdOBJ.sessionName;
+
+    sql.query(`DELETE FROM sessions WHERE sessionName = "${sessionName}"`);
+})
 
 router.get('/query', function(req, res) {
     sql.query("SELECT * FROM sessions", function(err,result,fields) {
@@ -32,6 +48,8 @@ router.get('/query', function(req, res) {
         res.send(result);
     })
 });
+
+
 
 module.exports = router;
 

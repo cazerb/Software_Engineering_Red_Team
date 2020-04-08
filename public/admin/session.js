@@ -24,7 +24,7 @@ for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     var optionsDiv = this.parentElement;
     var sessionItemDiv = optionsDiv.parentElement;
-    sessionItemDiv.style.display = "none";
+    deleteSession(sessionItemDiv);
   };
 }
 
@@ -52,6 +52,18 @@ function submitSession() {
   }
 
   sendPostRequest(jsonOBJ,"/sessionHandler/insert");
+}
+
+// Deletes a presenter
+function deleteSession(sessionDiv) {
+  sessionDiv.style.display = "none";
+  var infoDiv = sessionDiv.getElementsByClassName("session-item-info")[0];
+
+  var jsonOBJ = {
+    name: infoDiv.getElementsByClassName("session-name")[0].innerHTML,
+  }
+
+  sendPostRequest(jsonOBJ, "sessionHandler/delete");
 }
 
 // Get presenters to display
@@ -92,6 +104,7 @@ function addSession(sessionName, startTime, endTime, roomID, presenterID) {
   // Create Count Session Info
   var sessionText = document.createTextNode(sessionName);
   var session = document.createElement("h3");
+  session.classList.add("session-name");
   session.appendChild(sessionText);
 
   // Create Session Time Info
@@ -137,7 +150,7 @@ function addSession(sessionName, startTime, endTime, roomID, presenterID) {
     close[i].onclick = function() {
       var optionsDiv = this.parentElement;
       var sessionItemDiv = optionsDiv.parentElement;
-      sessionItemDiv.style.display = "none";
+      deleteSession(sessionItemDiv);
     };
   }
 

@@ -61,7 +61,7 @@ function deletePresenter(presenterDiv) {
     phone: infoDiv.getElementsByClassName("presenter-phone")[0].innerHTML,
   }
 
-  sendPostRequest(jsonOBJ, "presenterHandler/delete")
+  sendPostRequest(jsonOBJ, "presenterHandler/delete");
 }
 
 // Get presenters to display
