@@ -1,3 +1,6 @@
+// Display sessions on page load
+getSessions();
+
 // Session Items
 var sessionItems = document.getElementsByClassName("session-item");
 var i;
@@ -21,22 +24,8 @@ for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     var optionsDiv = this.parentElement;
     var sessionItemDiv = optionsDiv.parentElement;
-    sessionItemDiv.style.display = "none";
+    deleteSession(sessionItemDiv);
   };
-}
-
-// Session Form
-function submitSession() {
-  var jsonOBJ = {
-    sessionName: document.getElementById("session-input").value,
-    startTime: document.getElementById("start-time").value,
-    endTime: document.getElementById("end-time").value,
-    presenter: document.getElementById("presenter-select").value,
-    room: document.getElementById("room-select").value
-  }
-
-  sendPostRequest(jsonOBJ,"/sessionHandler/insert");
-
 }
 
 function openForm() {
@@ -52,7 +41,58 @@ function closeForm() {
   document.getElementById("sessionForm").style.display = "none";
 }
 
-function addSession() {
+// Session Form
+function submitSession() {
+  var jsonOBJ = {
+    sessionName: document.getElementById("session-input").value,
+    startTime: document.getElementById("start-time").value,
+    endTime: document.getElementById("end-time").value,
+    presenter: document.getElementById("presenter-select").value,
+    room: document.getElementById("room-select").value
+  }
+
+  sendPostRequest(jsonOBJ,"/sessionHandler/insert");
+}
+
+// Deletes a presenter
+function deleteSession(sessionDiv) {
+  sessionDiv.style.display = "none";
+  var infoDiv = sessionDiv.getElementsByClassName("session-item-info")[0];
+
+  var jsonOBJ = {
+    name: infoDiv.getElementsByClassName("session-name")[0].innerHTML,
+  }
+
+  sendPostRequest(jsonOBJ, "sessionHandler/delete");
+}
+
+// Get presenters to display
+function getSessions() {
+  var handler = "/sessionHandler/query";
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      result = JSON.parse(this.response);
+
+      for (var i = 0; i < result.length; i++) {
+        var sessionName = result[i].sessionName;
+        var startTime = result[i].startTime;
+        var endTime = result[i].endTime;
+        var room = result[i].roomID;
+        var presenter = result[i].presenterID;
+
+        addSession(sessionName, startTime, endTime, room, presenter);
+      }
+    }
+  };
+
+  xhr.open("GET", handler);
+  xhr.send();
+}
+
+function addSession(sessionName, startTime, endTime, roomID, presenterID) {
   // Create div to hold new count item
   var sessionDiv = document.createElement("div");
   sessionDiv.classList.add("session-item");
@@ -62,14 +102,12 @@ function addSession() {
   sessionInfo.classList.add("session-item-info");
 
   // Create Count Session Info
-  var sessionName = document.getElementById("session-input").value;
   var sessionText = document.createTextNode(sessionName);
   var session = document.createElement("h3");
+  session.classList.add("session-name");
   session.appendChild(sessionText);
 
   // Create Session Time Info
-  var startTime = document.getElementById("start-time").value;
-  var endTime = document.getElementById("end-time").value;
   var timeText = document.createTextNode(
     "Time: " + startTime + " - " + endTime
   );
@@ -77,21 +115,14 @@ function addSession() {
   sessionTime.appendChild(timeText);
 
   // Create Session Presenter Info
-  var presenterSelect = document.getElementById("presenter-select");
-  var selectedPresenter =
-    presenterSelect.options[presenterSelect.selectedIndex].text;
-  var presenterText = document.createTextNode(
-    "Presenter: " + selectedPresenter
-  );
+  var selectedPresenter = document.createTextNode(presenterID);
   var presenter = document.createElement("p");
-  presenter.appendChild(presenterText);
+  presenter.appendChild(selectedPresenter);
 
   // Create Session Room Info
-  var roomSelect = document.getElementById("room-select");
-  var selectedRoom = roomSelect.options[roomSelect.selectedIndex].value;
-  var roomText = document.createTextNode("Room #: " + selectedRoom);
+  var selectedRoom = document.createTextNode("Room #: " + roomID);
   var room = document.createElement("p");
-  room.appendChild(roomText);
+  room.appendChild(selectedRoom);
 
   // Append Info to div
   sessionInfo.appendChild(session);
@@ -119,7 +150,7 @@ function addSession() {
     close[i].onclick = function() {
       var optionsDiv = this.parentElement;
       var sessionItemDiv = optionsDiv.parentElement;
-      sessionItemDiv.style.display = "none";
+      deleteSession(sessionItemDiv);
     };
   }
 
