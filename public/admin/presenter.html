@@ -50,6 +50,7 @@
       <div id="presenter-list"></div>
     </div>
 
+    <!-- ADD FORM -->
     <form class="form" id="presenterForm" onsubmit="submitPresenter()">
       <h3>Add Presenter</h3>
 
@@ -98,8 +99,60 @@
       </div>
     </form>
 
+    <!-- EDIT FORM -->
+    <form class="form" id="presenterEditForm" onsubmit="editPresenter()">
+      <h3>Edit Presenter</h3>
+      <p id="id-edit" style="display: none;"></p>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Name</b></label>
+          <input
+            id="name-edit"
+            type="text"
+            placeholder="Enter Presenter Name"
+            name="Name"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Email</b></label>
+          <input
+            id="email-edit"
+            type="email"
+            placeholder="example@email.com"
+            name="Email"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Phone</b></label>
+          <input
+            id="phone-edit"
+            type="tel"
+            placeholder="XXX-XXX-XXXX"
+            name="Phone"
+            pattern="[0-9]{3} [0-9]{3} [0-9]{4}|[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          />
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn cancel" onclick="closeEdit()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+
     <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
-    <script src="/public/admin/slide-nav.js"></script>
+    <script type="text/javascript" src="/public/admin/presenterLoader.js"></script>
     <script type="text/javascript" src="/public/admin/presenter.js"></script>
+    <script type="text/javascript" src="/public/admin/presenterRequests.js"></script>
+    <script src="/public/admin/slide-nav.js"></script>
   </body>
 </html>

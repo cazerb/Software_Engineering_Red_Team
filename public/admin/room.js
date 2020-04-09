@@ -1,33 +1,3 @@
-// Display rooms on page load
-getRooms();
-
-// Room Items
-var roomItems = document.getElementsByClassName("room-item");
-var i;
-for (i = 0; i < roomItems.length; i++) {
-  var div = document.createElement("DIV");
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-
-  div.className = "room-item-options";
-  span.className = "close";
-  span.appendChild(txt);
-  div.appendChild(span);
-
-  roomItems[i].appendChild(div);
-}
-
-// Close Room Item On Click
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var optionsDiv = this.parentElement;
-    var roomItemDiv = optionsDiv.parentElement;
-    deleteRoom(roomItemDiv);
-  };
-}
-
 function openForm() {
   document.getElementById("roomForm").style.display = "block";
 }
@@ -38,58 +8,49 @@ function closeForm() {
   document.getElementById("roomForm").style.display = "none";
 }
 
-// Submit Room Form
-function submitRoom() {
-  var jsonOBJ = {
-    roomNumber: document.getElementById("room-input").value,
-    capacity: document.getElementById("capacity-input").value,
-  };
+function openEdit(roomDiv) {
+  // Update values
+  var currentRoom = String(roomDiv.firstElementChild.innerHTML);
+  currentRoom = currentRoom.split("#: ")[1];
+  document.getElementById("room-edit").value = currentRoom;
 
-  sendPostRequest(jsonOBJ, "/roomHandler/insert");
+  var currentCapacity = String(roomDiv.getElementsByClassName("room-capacity")[0].innerHTML);
+  currentCapacity = currentCapacity.split(": ")[1];
+  document.getElementById("capacity-edit").value = currentCapacity;
+  document.getElementById("id-edit").value = roomDiv.id;
+
+  // Open form
+  document.getElementById("roomEditForm").style.display = "block";
+
+  // Disable add session buttion
+  var addButton = document.getElementById("add-room");
+  addButton.disabled = true;
+  addButton.classList.toggle("disabled");
 }
 
-// Deletes a room
-function deleteRoom(roomDiv) {
-  roomDiv.style.display = "none";
-  var infoDiv = roomDiv.getElementsByClassName("room-item-info")[0];
+function closeEdit() {
+  // Update values
+  document.getElementById("room-edit").value = "";
+  document.getElementById("capacity-edit").value = "";
+  document.getElementById("roomEditForm").style.display = "none";
 
-  var jsonOBJ = {
-    roomNumber: infoDiv.getElementsByClassName("room-number")[0].innerHTML.split("#: ")[1],
+  // Check add session button
+  var addButton = document.getElementById("add-room");
+  if (addButton.disabled === true) {
+    addButton.disabled = false;
+    addButton.classList.toggle("disabled");
   }
-
-  sendPostRequest(jsonOBJ, "roomHandler/delete")
 }
 
-// Get rooms to display
-function getRooms() {
-  var handler = "roomHandler/query";
-
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      result = JSON.parse(this.response);
-
-      for (var i = 0; i < result.length; i++) {
-        var number = result[i].roomNumber;
-        var capacity = result[i].capacity;
-
-        addRoom(number, capacity);
-      }
-    }
-  };
-
-  xhr.open("GET", handler);
-  xhr.send();
-}
-
-function addRoom(number, capacity) {
+function addRoom(roomID, number, capacity) {
   // Create div to hold new room item
   var roomDiv = document.createElement("div");
   roomDiv.classList.add("room-item");
+  roomDiv.classList.add("entry-item");
 
   // Create div to hold new room info
   var div = document.createElement("div");
+  div.id = roomID;
   div.classList.add("room-item-info");
 
   // Create Room Number Info
@@ -141,5 +102,15 @@ function addRoom(number, capacity) {
       deleteRoom(roomItemDiv);
     };
   }
-  closeForm();
+
+  // Edit Room Item On Click
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].onclick = function () {
+      var optionsDiv = this.parentElement;
+      var roomItemDiv = optionsDiv.parentElement;
+      var roomDiv = roomItemDiv.firstElementChild;
+      openEdit(roomDiv);
+    };
+  }
 }

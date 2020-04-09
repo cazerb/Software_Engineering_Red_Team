@@ -46,6 +46,17 @@ html {
   box-shadow: 0 2px 8px rgba(192, 192, 192, 0.788);
 }
 
+.disabled {
+  background-color: rgb(100, 100, 100) !important;
+  border-color: rgb(100, 100, 100) !important;
+}
+
+.disabled:hover {
+  background-color: rgb(100, 100, 100) !important;
+  border-color: rgb(100, 100, 100) !important;
+  box-shadow: none !important;
+}
+
 a {
   text-decoration: none;
 }
@@ -79,6 +90,9 @@ a {
   font-style: italic;
 }
 
+.entry-item {
+  box-shadow: 0 5px 15px rgba(20, 20, 20, 0.788);
+}
 /********************************************/
 /*************** NAVIGATION *****************/
 /********************************************/
@@ -218,6 +232,7 @@ nav {
   width: 470px;
   text-align: center;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(20, 20, 20, 0.788);
 }
 
 .home-container h1 {
@@ -360,6 +375,10 @@ nav {
   height: 270px;
 }
 
+#presenterEditForm {
+  height: 270px;
+}
+
 /********************************************/
 /****************** ROOMS *******************/
 /********************************************/
@@ -465,6 +484,10 @@ nav {
 }
 
 #sessionForm {
+  height: 345px;
+}
+
+#sessionEditForm {
   height: 345px;
 }
 

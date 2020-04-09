@@ -50,9 +50,7 @@
       <div id="session-list"></div>
     </div>
 
-    <!------------------------------------------------------------
-     ------------------------- ADD FORM --------------------------
-    -------------------------------------------------------------->
+    <!-- ADD FORM -->
     <form class="form" id="sessionForm" onsubmit="submitSession()">
       <h3>Add Session</h3>
 
@@ -115,11 +113,10 @@
       </div>
     </form>
 
-    <!------------------------------------------------------------
-     ------------------------ EDIT FORM --------------------------
-    -------------------------------------------------------------->
-    <form class="form" id="editForm" onsubmit="editSubmission()">
+    <!-- EDIT FORM -->
+    <form class="form" id="sessionEditForm" onsubmit="editSession()">
       <h3>Edit Session</h3>
+      <p id="id-edit" style="display: none;"></p>
 
       <div class="form-container">
         <div class="form-input">
@@ -170,7 +167,7 @@
         </div>
 
         <div class="form-submit">
-          <button type="submit" class="btn cancel" onclick="closeForm()">
+          <button type="submit" class="btn cancel" onclick="closeEdit()">
             Cancel
           </button>
           <button type="submit" class="btn save">

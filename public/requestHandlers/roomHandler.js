@@ -30,6 +30,32 @@ router.post('/delete', function(req, res) {
     var roomNumber = holdOBJ.roomNumber;
 
     sql.query(`DELETE FROM rooms WHERE roomNumber = "${roomNumber}"`);
+});
+
+router.post('/update', function(req, res) {
+    var holdOBJ = req.body;
+    
+    //if any values are empty, set them to null
+    for (var key in holdOBJ){
+        if (holdOBJ[key] == '')
+            holdOBJ[key] = null;
+    }
+    
+    var roomID = holdOBJ.roomID;
+    var roomNumber = holdOBJ.roomNumber;
+    var capacity = holdOBJ.capacity;
+    console.log(roomID);
+
+    sql.query(`UPDATE rooms SET roomNumber="${roomNumber}", capacity="${capacity}" WHERE roomID="${roomID}"`, function(err,result,field) {
+        if(err) {
+            console.log("FAILED")
+            res.send("FAILED");
+        }
+        else {
+            console.log("SUCCESS")
+            res.send("SUCCESS");
+        }
+    });
 })
 
 router.get('/query', function(req, res) {

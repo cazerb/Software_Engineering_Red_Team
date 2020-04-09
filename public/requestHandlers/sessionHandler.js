@@ -37,8 +37,36 @@ router.post('/delete', function(req, res) {
             holdOBJ[key] = null;
     }
     
+    var sessionID = holdOBJ.sessionID;
+    sql.query(`DELETE FROM sessions WHERE sessionID = "${sessionID}"`);
+})
+
+router.post('/update', function(req, res) {
+    var holdOBJ = req.body;
+    
+    //if any values are empty, set them to null
+    for (var key in holdOBJ){
+        if (holdOBJ[key] == '')
+            holdOBJ[key] = null;
+    }
+    
+    var sessionID = holdOBJ.sessionID;
     var sessionName = holdOBJ.sessionName;
-    sql.query(`DELETE FROM sessions WHERE sessionName = "${sessionName}"`);
+    var startTime = holdOBJ.startTime;
+    var endTime = holdOBJ.endTime;
+    var presenterID = holdOBJ.presenterID;
+    var roomID = holdOBJ.roomID;
+
+    sql.query(`UPDATE sessions SET sessionName="${sessionName}", startTime="${startTime}", endTime="${endTime}", presenterID="${presenterID}", roomID="${roomID}" WHERE sessionID="${sessionID}"`, function(err,result,field) {
+        if(err) {
+            console.log("FAILED")
+            res.send("FAILED");
+        }
+        else {
+            console.log("SUCCESS")
+            res.send("SUCCESS");
+        }
+    });
 })
 
 router.get('/query', function(req, res) {
