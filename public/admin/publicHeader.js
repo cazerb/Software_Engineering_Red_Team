@@ -5,7 +5,6 @@ function sendPostRequest(jsonOBJ,handler) {
   
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === 4 && this.status === 200) {
-            // Request finished. Do processing here.
         }
     }
     xhr.send(JSON.stringify(jsonOBJ));

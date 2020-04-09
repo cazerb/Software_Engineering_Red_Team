@@ -18,7 +18,7 @@ router.post('/insert', function(req, res) {
     var roomID = holdOBJ.roomID;
     var presenterID = holdOBJ.presenterID;
 
-    sql.query(`INSERT INTO sessions (sessionName,startTime,endTime,roomID,presenterID) VALUES ("${sessionName}","${startTime}","${endTime}","${roomID}","${presenterID}")`, function (error, results, fields) {
+    sql.query(`INSERT INTO sessions (sessionName,startTime,endTime,roomID,presenterID) VALUES ("${sessionName}","${startTime}","${endTime}",${roomID},${presenterID})`, function (error, results, fields) {
         if (error) {
             if(error.code == "ER_DUP_ENTRY"){
                 console.log("THE SESSION NAME ALREADY EXISTS");
@@ -52,7 +52,7 @@ router.post('/update', function(req, res) {
         if (holdOBJ[key] == '')
             holdOBJ[key] = null;
     }
-    
+
     var sessionID = holdOBJ.sessionID;
     var sessionName = holdOBJ.sessionName;
     var startTime = holdOBJ.startTime;
@@ -60,26 +60,21 @@ router.post('/update', function(req, res) {
     var presenterID = holdOBJ.presenterID;
     var roomID = holdOBJ.roomID;
 
-    sql.query(`UPDATE sessions SET sessionName="${sessionName}", startTime="${startTime}", endTime="${endTime}", presenterID="${presenterID}", roomID="${roomID}" WHERE sessionID="${sessionID}"`, function(err,result,field) {
+    sql.query(`UPDATE sessions SET sessionName="${sessionName}", startTime="${startTime}", endTime="${endTime}", presenterID=${presenterID}, roomID=${roomID} WHERE sessionID="${sessionID}"`, function(err,result,field) {
         if(err) {
-            console.log("FAILED")
-            res.send("FAILED");
+            res.send("FAILED TO UPDATE SESSIONS");
         }
         else {
-            console.log("SUCCESS")
-            res.send("SUCCESS");
+            res.send("UPDATED SESSIONS");
         }
     });
 })
 
 router.get('/query', function(req, res) {
-    sql.query("SELECT * FROM sessions", function(err,result,fields) {
+    sql.query("SELECT * FROM sessions ORDER BY startTime ASC", function(err,result,fields) {
         String(result);
         res.send(result);
     })
 });
 
-
-
 module.exports = router;
-
