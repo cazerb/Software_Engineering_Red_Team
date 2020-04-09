@@ -17,13 +17,16 @@ router.post('/insert', function(req, res) {
     var endTime = holdOBJ.endTime;
     var roomID = holdOBJ.roomID;
     var presenterID = holdOBJ.presenterID;
-    
-    sql.query(`INSERT INTO sessions(sessionName,startTime,endTime,roomID,presenterID) VALUES("${sessionName}",${startTime},
-    ${endTime},${roomID},${presenterID})`, function (error, results, fields) {
-        if (error !== null) {
+
+    sql.query(`INSERT INTO sessions (sessionName,startTime,endTime,roomID,presenterID) VALUES ("${sessionName}","${startTime}","${endTime}","${roomID}","${presenterID}")`, function (error, results, fields) {
+        if (error) {
             if(error.code == "ER_DUP_ENTRY"){
                 console.log("THE SESSION NAME ALREADY EXISTS");
             }
+            console.log(error);
+        }
+        else {
+            console.log("FINISHED");
         }
     });
 });

@@ -41,6 +41,20 @@ function openEdit(sessionDiv) {
   var addButton = document.getElementById("add-session");
   addButton.disabled = true;
   addButton.classList.toggle("disabled");
+
+  // Disable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    close[i].disabled = true;
+    close[i].classList.toggle("disabled");
+  }
+
+  // Disable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].disabled = true;
+    editButton[i].classList.toggle("disabled");
+  }
 }
 
 function closeEdit() {
@@ -57,6 +71,24 @@ function closeEdit() {
   if (addButton.disabled === true) {
     addButton.disabled = false;
     addButton.classList.toggle("disabled");
+  }
+
+  // Enable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    if (close[i].disabled === true) {
+      close[i].disabled = false;
+      close[i].classList.toggle("disabled");
+    }
+  }
+
+  // Enable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    if (editButton[i].disabled === true) {
+      editButton[i].disabled = false;
+      editButton[i].classList.toggle("disabled");
+    }
   }
 }
 
@@ -82,10 +114,10 @@ function createSessionDiv(sessionID, sessionName) {
 
   // Create Count options div  
   var optionsDiv = document.createElement("DIV");
-  var edit = document.createElement("p");
+  var edit = document.createElement("button");
   var editText = document.createTextNode("EDIT");
-  var span = document.createElement("span");
-  var txt = document.createTextNode("\u00D7");
+  var span = document.createElement("button");
+  var txt = document.createTextNode("DELETE");
 
   optionsDiv.className = "session-item-options";
   edit.className = "edit";
@@ -132,8 +164,32 @@ function addSessionTime(sessionID, startTime, endTime) {
     sessionTime.classList.add("null-text");
   }
   else {
+    startTime = startTime.split(":")[0] + ":" + startTime.split(":")[1];
+    startTime = startTime.replace(/^0+/, '');
+    var leadingStart = startTime.split(":")[0];
+
+    endTime = endTime.split(":")[0] + ":" + endTime.split(":")[1];
+    endTime = endTime.replace(/^0+/, '');
+    var leadingEnd = endTime.split(":")[0];
+
+    if (leadingStart > 12) {
+      leadingStart = leadingStart - 12;
+      var correctedStartTime = leadingStart + ":" + startTime.split(":")[1] + " PM"
+    }
+    else {
+      var correctedStartTime = startTime + " AM"
+    }
+    
+    if (leadingEnd > 12) {
+      leadingEnd = leadingEnd - 12;
+      var correctedEndTime = leadingEnd + ":" + endTime.split(":")[1] + " PM"
+    }
+    else {
+      var correctedEndTime = endTime + " AM"
+    }
+
     var timeText = document.createTextNode(
-      "Time: " + startTime + " - " + endTime
+      correctedStartTime + " - " + correctedEndTime
     );
   }
   sessionTime.appendChild(timeText);

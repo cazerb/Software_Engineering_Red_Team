@@ -44,7 +44,6 @@ router.post('/update', function(req, res) {
     var roomID = holdOBJ.roomID;
     var roomNumber = holdOBJ.roomNumber;
     var capacity = holdOBJ.capacity;
-    console.log(roomID);
 
     sql.query(`UPDATE rooms SET roomNumber="${roomNumber}", capacity="${capacity}" WHERE roomID="${roomID}"`, function(err,result,field) {
         if(err) {
