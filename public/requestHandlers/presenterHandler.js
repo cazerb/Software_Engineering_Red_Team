@@ -16,7 +16,17 @@ router.post('/insert', function(req, res) {
         email = holdOBJ.email;
         phone = holdOBJ.phone;
 
-    sql.query(`INSERT INTO presenter(name,email,phone) VALUES("${name}","${email}","${phone}")`);
+    sql.query(`INSERT INTO presenter(name,email,phone) VALUES("${name}","${email}","${phone}")`, function(error, result, field) {
+        if (error) {
+            if(error.code === "ER_DUP_ENTRY"){
+                console.log("THE EMAIL ALREADY EXISTS");
+            }
+            console.log(error);
+        }
+        else {
+            console.log("FINISHED");
+        }
+    });
 });
 
 router.post('/delete', function(req, res) {

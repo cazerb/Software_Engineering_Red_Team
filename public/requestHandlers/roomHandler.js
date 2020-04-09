@@ -15,7 +15,17 @@ router.post('/insert', function(req, res) {
     var roomNumber = holdOBJ.roomNumber;
         capacity = holdOBJ.capacity;
         
-    sql.query(`INSERT INTO rooms(roomNumber,capacity) VALUES(${roomNumber},${capacity})`);
+    sql.query(`INSERT INTO rooms(roomNumber,capacity) VALUES(${roomNumber},${capacity})`, function(error, result, field) {
+        if (error) {
+            if(error.code === "ER_DUP_ENTRY"){
+                console.log("THE ROOM NUMBER ALREADY EXISTS");
+            }
+            console.log(error);
+        }
+        else {
+            console.log("FINISHED");
+        }
+    });
 });
 
 router.post('/delete', function(req, res) {
