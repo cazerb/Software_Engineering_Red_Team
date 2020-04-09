@@ -50,6 +50,9 @@
       <div id="session-list"></div>
     </div>
 
+    <!------------------------------------------------------------
+     ------------------------- ADD FORM --------------------------
+    -------------------------------------------------------------->
     <form class="form" id="sessionForm" onsubmit="submitSession()">
       <h3>Add Session</h3>
 
@@ -112,8 +115,75 @@
       </div>
     </form>
 
+    <!------------------------------------------------------------
+     ------------------------ EDIT FORM --------------------------
+    -------------------------------------------------------------->
+    <form class="form" id="editForm" onsubmit="editSubmission()">
+      <h3>Edit Session</h3>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Session Name</b></label>
+          <input
+            id="session-edit"
+            type="text"
+            placeholder="Enter Session Name"
+            name="session"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Start Time</b></label>
+          <input
+            id="start-edit"
+            class="time-box"
+            type="time"
+            name="Start Time"
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>End Time</b></label>
+          <input
+            id="end-edit"
+            class="time-box"
+            type="time"
+            name="End Time"
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Select Presenter</b></label>
+          <select id="presenter-edit" name="presenters">
+            <option value="" selected disabled hidden
+              >Choose a presenter</option
+            >
+          </select>
+        </div>
+
+        <div class="form-input">
+          <label><b>Select Room</b></label>
+          <select id="room-edit" name="rooms">
+            <option value="" selected disabled hidden>Choose a room</option>
+          </select>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn cancel" onclick="closeForm()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+
     <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
-    <script src="/public/admin/slide-nav.js"></script>
+    <script type="text/javascript" src="/public/admin/sessionLoader.js"></script>
     <script type="text/javascript" src="/public/admin/session.js"></script>
+    <script type="text/javascript" src="/public/admin/sessionRequests.js"></script>
+    <script src="/public/admin/slide-nav.js"></script>
   </body>
 </html>

@@ -13,13 +13,13 @@ router.post('/insert', function(req, res) {
     }
 
     var sessionName = holdOBJ.sessionName;
-        startTime = holdOBJ.startTime;
-        endTime = holdOBJ.endTime;
-        roomID = holdOBJ.roomID;
-        presenterID = holdOBJ.presenterID;
+    var startTime = holdOBJ.startTime;
+    var endTime = holdOBJ.endTime;
+    var roomID = holdOBJ.roomID;
+    var presenterID = holdOBJ.presenterID;
     
-    sql.query(`INSERT INTO sessions(sessionName,startTime,endTime,roomID,presenterID) VALUES("${sessionName}","${startTime}",
-    "${endTime}", "${roomID}", "${presenterID}")`, function (error, results, fields) {
+    sql.query(`INSERT INTO sessions(sessionName,startTime,endTime,roomID,presenterID) VALUES("${sessionName}",${startTime},
+    ${endTime},${roomID},${presenterID})`, function (error, results, fields) {
         if (error !== null) {
             if(error.code == "ER_DUP_ENTRY"){
                 console.log("THE SESSION NAME ALREADY EXISTS");
