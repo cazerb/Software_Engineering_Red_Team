@@ -12,14 +12,44 @@ router.post('/insertCounts', function(req, res) {
             holdOBJ[key] = null;
     }
 
-    var session = holdOBJ.session;
-        startCount = holdOBJ.startCount;
-        middleCount = holdOBJ.middleCount;
-        endCount = holdOBJ.endCount;
-        //passPhrase = holdOBJ.passPhrase;
+    var sessionID = holdOBJ.sessionID;
+    var count = holdOBJ.count;
+    var countTime = holdOBJ.countTime;
+    var passPhrase = holdOBJ.passPhrase;
 
-    sql.query(`UPDATE sessions SET startCount="${startCount}",middleCount="${middleCount}",endCount="${endCount}" WHERE sessionID=
-    (SELECT sessionID FROM sessions WHERE sessionName = "${session}")`);
+    if (countTime === "1" && passPhrase === "123") {
+        sql.query(`UPDATE sessions SET startCount="${count}" WHERE sessionID="${sessionID}"`, function(err,result,field) {
+            if(err) {
+                res.send("FAILED");
+            }
+            else {
+                res.send("SUCCESS");
+            }
+        });
+    }
+    else if (countTime === "2" && passPhrase === "123") {
+        sql.query(`UPDATE sessions SET middleCount="${count}" WHERE sessionID="${sessionID}"`, function(err,result,field) {
+            if(err) {
+                res.send("FAILED");
+            }
+            else {
+                res.send("SUCCESS");
+            }
+        });
+    }
+    else if (countTime === "3" && passPhrase === "123") {
+        sql.query(`UPDATE sessions SET endCount="${count}" WHERE sessionID="${sessionID}"`, function(err,result,field) {
+            if(err) {
+                res.send("FAILED");
+            }
+            else {
+                res.send("SUCCESS");
+            }
+        });
+    }
+    else {
+        res.send("ERROR");
+    }
 });
 
 module.exports = router;

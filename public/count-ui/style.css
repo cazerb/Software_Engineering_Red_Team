@@ -92,11 +92,16 @@ nav {
 .form-input {
   padding-bottom: 20px;
 }
+
 .form-input select {
   color: black;
   border-radius: none;
   height: 23px;
   width: 100%;
+}
+
+.form-input select option {
+  color: black;
 }
 
 .form-input input {

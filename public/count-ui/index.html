@@ -17,74 +17,47 @@
   <body>
     <nav>
       <div class="logo">
-        <h1>Boston Code Camp</h1>
+        <h1><a href="/count">Boston Code Camp</a></h1>
       </div>
     </nav>
 
     <form class="form" id="countForm" onsubmit="addCount()">
       <div class="input-container">
         <div class="form-input">
-          <label><b>Select Session</b></label>
+          <label><b>Session</b></label>
           <select id="session-select" name="session" required>
             <option value="" selected disabled hidden>Choose a session</option>
-            <option value="Software Engineering">Software Engineering</option>
-            <option value="Test Driven Development"
-              >Test Driven Development</option
-            >
           </select>
         </div>
 
-        <!--
         <div class="form-input">
-          <label><b>Select Count Time</b></label>
+          <label><b>Count Time</b></label>
           <select id="count-select" name="session" required>
             <option value="" selected disabled hidden>Choose a time</option>
             <option value="1">Beginning</option>
             <option value="2">Middle</option>
             <option value="3">End</option>
           </select>
-        </div> -->
+        </div>
 
         <div class="form-input">
-          <label><b>Starting Count</b></label>
+          <label><b>Count</b></label>
           <input
-            id="start-count"
+            id="count"
             type="number"
-            placeholder="Enter starting count"
+            placeholder="Enter number of people"
             name="startCount"
             required
           />
         </div>
 
         <div class="form-input">
-            <label><b>Middle Count</b></label>
-            <input
-              id="middle-count"
-              type="number"
-              placeholder="Enter middle count"
-              name="middleCount"
-              required
-            />
-          </div>
-
-          <div class="form-input">
-            <label><b>Ending Count</b></label>
-            <input
-              id="end-count"
-              type="number"
-              placeholder="Enter ending count"
-              name="endCount"
-              required
-            />
-          </div>
-
-        <div class="form-input">
-          <label><b>Password</b></label>
+          <label><b>Passcode</b></label>
           <input
             id="password-input"
             type="password"
-            placeholder="Enter password"
-            name="password"
+            placeholder="Enter passcode"
+            name="passcode"
           />
         </div>
       </div>
