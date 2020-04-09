@@ -54,8 +54,7 @@ function deleteRoom(roomDiv) {
   var infoDiv = roomDiv.getElementsByClassName("room-item-info")[0];
 
   var jsonOBJ = {
-    roomNumber: infoDiv.getElementsByClassName("room-number")[0].innerHTML.split(": ")[1],
-    capacity: infoDiv.getElementsByClassName("room-capacity")[0].innerHTML.split(": ")[1],
+    roomNumber: infoDiv.getElementsByClassName("room-number")[0].innerHTML.split("#: ")[1],
   }
 
   sendPostRequest(jsonOBJ, "roomHandler/delete")
@@ -102,6 +101,10 @@ function addRoom(number, capacity) {
   // Create Room Capacity Info
   var capacityText = document.createTextNode("Capacity: " + capacity);
   var roomCapacity = document.createElement("p");
+  if (capacity === null) {
+    capacityText = document.createTextNode("No Capacity Set");
+    roomCapacity.classList.add("null-text");
+  }
   roomCapacity.classList.add("room-capacity");
   roomCapacity.appendChild(capacityText);
 
@@ -111,12 +114,18 @@ function addRoom(number, capacity) {
 
   // Create room options div
   var optionsDiv = document.createElement("DIV");
+  var edit = document.createElement("p");
+  var editText = document.createTextNode("EDIT");
   var span = document.createElement("span");
   var txt = document.createTextNode("\u00D7");
 
   optionsDiv.className = "room-item-options";
+  edit.className = "edit";
   span.className = "close";
+
+  edit.appendChild(editText);
   span.appendChild(txt);
+  optionsDiv.appendChild(edit);
   optionsDiv.appendChild(span);
 
   roomDiv.appendChild(div);

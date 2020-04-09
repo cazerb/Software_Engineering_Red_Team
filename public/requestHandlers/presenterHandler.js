@@ -30,9 +30,8 @@ router.post('/delete', function(req, res) {
     
     var name = holdOBJ.name;
     var email = holdOBJ.email;
-    var phone = holdOBJ.phone;
 
-    sql.query(`DELETE FROM presenter WHERE name = "${name}" AND email = "${email}" AND phone = "${phone}"`)
+    sql.query(`DELETE FROM presenter WHERE name = "${name}" AND email = "${email}"`)
 })
 
 router.get('/query', function(req, res) {

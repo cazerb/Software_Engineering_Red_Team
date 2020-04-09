@@ -58,7 +58,6 @@ function deletePresenter(presenterDiv) {
   var jsonOBJ = {
     name: infoDiv.getElementsByClassName("presenter-name")[0].innerHTML,
     email: infoDiv.getElementsByClassName("presenter-email")[0].innerHTML,
-    phone: infoDiv.getElementsByClassName("presenter-phone")[0].innerHTML,
   }
 
   sendPostRequest(jsonOBJ, "presenterHandler/delete");
@@ -110,6 +109,10 @@ function addPresenter(name, email, phone) {
 
   var phoneText = document.createTextNode(phone);
   var presenterPhone = document.createElement("p");
+  if (phone === "null") {
+    phoneText = document.createTextNode("No Phone Number");
+    presenterPhone.classList.add("null-text");
+  }
   presenterPhone.classList.add("presenter-phone");
   presenterPhone.appendChild(phoneText);
 
@@ -120,12 +123,18 @@ function addPresenter(name, email, phone) {
 
   // Create room options div
   var optionsDiv = document.createElement("DIV");
-  var span = document.createElement("SPAN");
+  var edit = document.createElement("p");
+  var editText = document.createTextNode("EDIT");
+  var span = document.createElement("span");
   var txt = document.createTextNode("\u00D7");
 
   optionsDiv.className = "presenter-item-options";
+  edit.className = "edit";
   span.className = "close";
+
+  edit.appendChild(editText);
   span.appendChild(txt);
+  optionsDiv.appendChild(edit);
   optionsDiv.appendChild(span);
 
   presenterDiv.appendChild(div);
@@ -141,5 +150,4 @@ function addPresenter(name, email, phone) {
       deletePresenter(presenterItemDiv);
     };
   }
-  closeForm();
 }
