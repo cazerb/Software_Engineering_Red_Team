@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2020 at 08:30 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Generation Time: Apr 09, 2020 at 09:09 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `presenter` (
   `presenterID` int(10) NOT NULL,
   `name` varchar(25) NOT NULL,
-  `email` varchar(40) DEFAULT NULL,
+  `email` varchar(40) NOT NULL,
   `phone` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,7 +40,10 @@ CREATE TABLE `presenter` (
 --
 
 INSERT INTO `presenter` (`presenterID`, `name`, `email`, `phone`) VALUES
-(1, 'John Doe', 'jdoe@gmail.com', 'null');
+(5, 'John Doe', 'does@gmail.com', '503-533-5333'),
+(7, 'Jen Appleseed', 'appleseedj@wit.edu', '343-533-5333'),
+(10, 'Jane Ellis', 'ellisj@wit.edu', '344-533-5555'),
+(11, 'Cameron Liddell', 'liddellc@gmail.com', '123-424-5555');
 
 -- --------------------------------------------------------
 
@@ -59,7 +62,11 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`roomID`, `roomNumber`, `capacity`) VALUES
-(197, 2, 45);
+(202, 1, 50),
+(203, 2, 50),
+(205, 4, 50),
+(209, 5, 50),
+(210, 3, 50);
 
 -- --------------------------------------------------------
 
@@ -84,7 +91,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`sessionID`, `sessionName`, `startTime`, `endTime`, `roomID`, `presenterID`, `startCount`, `middleCount`, `endCount`) VALUES
-(11, 'Test Driven Development', '00:00:00', '00:00:00', 197, 1, 9, 8, 7);
+(10, 'Test Driven Development', '09:00:00', '10:00:00', 202, 5, NULL, NULL, NULL),
+(12, 'SWE', '14:00:00', '15:00:00', 205, 7, NULL, NULL, NULL),
+(13, 'ACM', '08:00:00', '09:00:00', 209, 10, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -94,13 +103,15 @@ INSERT INTO `sessions` (`sessionID`, `sessionName`, `startTime`, `endTime`, `roo
 -- Indexes for table `presenter`
 --
 ALTER TABLE `presenter`
-  ADD PRIMARY KEY (`presenterID`);
+  ADD PRIMARY KEY (`presenterID`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`roomID`);
+  ADD PRIMARY KEY (`roomID`),
+  ADD UNIQUE KEY `roomNumber` (`roomNumber`);
 
 --
 -- Indexes for table `sessions`
@@ -119,19 +130,19 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `presenter`
 --
 ALTER TABLE `presenter`
-  MODIFY `presenterID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `presenterID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `roomID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `roomID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `sessionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `sessionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
