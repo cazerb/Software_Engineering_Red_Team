@@ -50,8 +50,33 @@ a {
   text-decoration: none;
 }
 
+.close {
+  padding: 5px 7px;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+
 .close:hover {
   cursor: pointer;
+  background-color: red;
+}
+
+.edit {
+  font-weight: bolder;
+  font-size: 12px;
+  margin-right: 10px;
+  padding: 7px;
+  border-radius: 3px;
+}
+
+.edit:hover {
+  cursor: pointer;
+  background-color: lightslategray;
+}
+
+.null-text {
+  color: rgb(155, 155, 155);
+  font-style: italic;
 }
 
 /********************************************/
@@ -515,6 +540,7 @@ nav {
   margin-left: -250px;
   background-color: rgb(44, 43, 43);
   border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(20, 20, 20, 0.788);
 }
 
 .form-container {
@@ -532,6 +558,10 @@ nav {
   border-radius: none;
   width: 145px;
   height: 23px;
+}
+
+.form-input select option {
+  color: black;
 }
 
 .form-input input {

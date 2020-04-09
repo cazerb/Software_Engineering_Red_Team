@@ -84,7 +84,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`sessionID`, `sessionName`, `startTime`, `endTime`, `roomID`, `presenterID`, `startCount`, `middleCount`, `endCount`) VALUES
-(11, 'Test Driven Development', '00:00:00', '00:00:00', 197, 18, 9, 8, 7);
+(11, 'Test Driven Development', '00:00:00', '00:00:00', 197, 1, 9, 8, 7);
 
 --
 -- Indexes for dumped tables

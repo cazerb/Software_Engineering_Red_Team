@@ -28,9 +28,8 @@ router.post('/delete', function(req, res) {
     }
     
     var roomNumber = holdOBJ.roomNumber;
-    var capacity = holdOBJ.capacity;
 
-    sql.query(`DELETE FROM rooms WHERE roomNumber = "${roomNumber}" AND capacity = "${capacity}"`);
+    sql.query(`DELETE FROM rooms WHERE roomNumber = "${roomNumber}"`);
 })
 
 router.get('/query', function(req, res) {
