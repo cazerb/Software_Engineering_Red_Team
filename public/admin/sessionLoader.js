@@ -10,58 +10,6 @@ loadPresenterDropdown("presenter-select");
 loadPresenterDropdown("presenter-edit");
 loadRoomDropdown("room-select");
 loadRoomDropdown("room-edit");
-loadOptionsMenu();
-
-/**
- * FUNCTION
- * Loads in menu options for each session item displayed
- */
-function loadOptionsMenu() {
-  var sessionItems = document.getElementsByClassName("session-item");
-
-  // Add option menu for each session item
-  for (var i = 0; i < sessionItems.length; i++) {
-    var div = document.createElement("DIV");
-
-    var edit = document.createElement("p");
-    var editText = document.createTextNode("EDIT");
-
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-
-    div.className = "session-item-options";
-    edit.className = "edit";
-    span.className = "close";
-
-    edit.appendChild(editText);
-    span.appendChild(txt);
-    div.appendChild(edit);
-    div.appendChild(span);
-
-    sessionItems[i].appendChild(div);
-  }
-
-  // Close Session Item On Click
-  var close = document.getElementsByClassName("close");
-  for (var i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      var optionsDiv = this.parentElement;
-      var sessionItemDiv = optionsDiv.parentElement;
-      deleteSession(sessionItemDiv);
-    };
-  }
-
-  // Edit Session Item On Click
-  var editButton = document.getElementsByClassName("edit");
-  for (var i = 0; i < editButton.length; i++) {
-    editButton[i].onclick = function () {
-      var optionsDiv = this.parentElement;
-      var sessionItemDiv = optionsDiv.parentElement;
-      var sessionDiv = sessionItemDiv.firstElementChild;
-      openEdit(sessionDiv);
-    };
-  }
-}
 
 /**
  * FUNCTION

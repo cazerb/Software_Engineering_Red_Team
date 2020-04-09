@@ -4,6 +4,7 @@
   padding: 0;
   color: rgb(235, 235, 235);
   font-family: Arial, Helvetica, sans-serif;
+  outline: none;
 }
 
 body,
@@ -49,6 +50,7 @@ html {
 .disabled {
   background-color: rgb(100, 100, 100) !important;
   border-color: rgb(100, 100, 100) !important;
+  cursor: default !important;
 }
 
 .disabled:hover {
@@ -62,8 +64,11 @@ a {
 }
 
 .close {
-  padding: 5px 7px;
+  background-color: rgb(56, 56, 56);
+  border: none;
   font-weight: bolder;
+  font-size: 12px;
+  padding: 7px;
   border-radius: 3px;
 }
 
@@ -73,9 +78,11 @@ a {
 }
 
 .edit {
+  background-color: rgb(56, 56, 56);
+  border: none;
   font-weight: bolder;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 7px;
   border-radius: 3px;
 }
@@ -83,6 +90,8 @@ a {
 .edit:hover {
   cursor: pointer;
   background-color: lightslategray;
+  border: none;
+  outline: none;
 }
 
 .null-text {
