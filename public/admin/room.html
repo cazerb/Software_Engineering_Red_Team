@@ -50,7 +50,7 @@
       <div id="room-list"></div>
     </div>
 
-
+    <!-- ADD FORM -->
     <form class="form" id="roomForm" onsubmit="submitRoom()" >
       <h3>Add Room</h3>
 
@@ -87,9 +87,50 @@
       </div>
     </form>
 
+    <!-- EDIT FORM -->
+    <form class="form" id="roomEditForm" onsubmit="editRoom()" >
+      <h3>Edit Room</h3>
+      <p id="id-edit" style="display: none;"></p>
+
+      <div class="form-container">
+        <div class="form-input">
+          <label><b>Room Number</b></label>
+          <input
+            id="room-edit"
+            type="number"
+            placeholder="Enter Room Number"
+            name="RoomNumber"
+            required
+          />
+        </div>
+
+        <div class="form-input">
+          <label><b>Capacity</b></label>
+          <input
+            id="capacity-edit"
+            type="number"
+            placeholder="Enter Room Capacity"
+            name="Capacity"
+          />
+        </div>
+
+        <div class="form-submit">
+          <button class="btn cancel" onclick="closeEdit()">
+            Cancel
+          </button>
+          <button type="submit" class="btn save">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+
     <script type="text/javascript" src="/public/admin/publicHeader.js"></script>
-    <script src="/public/admin/slide-nav.js"></script>
+    <script type="text/javascript" src="/public/admin/roomLoader.js"></script>
     <script type="text/javascript" src="/public/admin/room.js"></script>
+    <script type="text/javascript" src="/public/admin/roomRequests.js"></script>
+    <script src="/public/admin/slide-nav.js"></script>
+    
     
   </body>
 </html>

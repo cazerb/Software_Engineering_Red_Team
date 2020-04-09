@@ -4,10 +4,67 @@
  **********************************************************************
  */
 
+ /**
+ * FUNCTION
+ * Opens session add-form
+ */
+function openForm() {
+  document.getElementById("sessionForm").style.display = "block";
+}
+
+/**
+ * FUNCTION
+ * Opens session add-form
+ */
+function closeForm() {
+  document.getElementById("session-input").value = "";
+  document.getElementById("start-time").value = "";
+  document.getElementById("end-time").value = "";
+  document.getElementById("presenter-select").selectedIndex = 0;
+  document.getElementById("room-select").selectedIndex = 0;
+  document.getElementById("sessionForm").style.display = "none";
+}
+
+function openEdit(sessionDiv) {
+  // Update values
+  document.getElementById("session-edit").value = sessionDiv.firstElementChild.innerHTML;
+  document.getElementById("id-edit").value = sessionDiv.id;
+
+  // document.getElementById("end-edit").value = "";
+  // document.getElementById("presenter-edit").selectedIndex = 0;
+  // document.getElementById("room-edit").selectedIndex = 0;
+
+  // Open form
+  document.getElementById("sessionEditForm").style.display = "block";
+
+  // Disable add session buttion
+  var addButton = document.getElementById("add-session");
+  addButton.disabled = true;
+  addButton.classList.toggle("disabled");
+}
+
+function closeEdit() {
+  // Update values
+  document.getElementById("session-edit").value = "";
+  document.getElementById("start-edit").value = "";
+  document.getElementById("end-edit").value = "";
+  document.getElementById("presenter-edit").selectedIndex = 0;
+  document.getElementById("room-edit").selectedIndex = 0;
+  document.getElementById("sessionEditForm").style.display = "none";
+
+  // Check add session button
+  var addButton = document.getElementById("add-session");
+  if (addButton.disabled === true) {
+    addButton.disabled = false;
+    addButton.classList.toggle("disabled");
+  }
+}
+
 function createSessionDiv(sessionID, sessionName) {
   // Create div to hold new session item
   var sessionDiv = document.createElement("div");
   sessionDiv.classList.add("session-item");
+  sessionDiv.classList.add("entry-item");
 
   // Create div to hold new session info
   var sessionInfo = document.createElement("div");
@@ -45,11 +102,23 @@ function createSessionDiv(sessionID, sessionName) {
   document.getElementById("session-list").appendChild(sessionDiv);
 
   // Add Close on click
-  for (i = 0; i < close.length; i++) {
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var optionsDiv = this.parentElement;
       var sessionItemDiv = optionsDiv.parentElement;
       deleteSession(sessionItemDiv);
+    };
+  }
+
+  // Edit Session Item On Click
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].onclick = function () {
+      var optionsDiv = this.parentElement;
+      var sessionItemDiv = optionsDiv.parentElement;
+      var sessionDiv = sessionItemDiv.firstElementChild;
+      openEdit(sessionDiv);
     };
   }
 }

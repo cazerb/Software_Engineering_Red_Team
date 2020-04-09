@@ -1,13 +1,15 @@
-/**
+/*******************************************************************
  *******************************************************************
  *** All JavaScript that deals with loading data for Sessions UI ***
  *******************************************************************
- */
+ *******************************************************************/
 
 // Display sessions on page load
 getSessions();
-loadPresenterDropdown();
-loadRoomDropdown();
+loadPresenterDropdown("presenter-select");
+loadPresenterDropdown("presenter-edit");
+loadRoomDropdown("room-select");
+loadRoomDropdown("room-edit");
 loadOptionsMenu();
 
 /**
@@ -48,13 +50,24 @@ function loadOptionsMenu() {
       deleteSession(sessionItemDiv);
     };
   }
+
+  // Edit Session Item On Click
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].onclick = function () {
+      var optionsDiv = this.parentElement;
+      var sessionItemDiv = optionsDiv.parentElement;
+      var sessionDiv = sessionItemDiv.firstElementChild;
+      openEdit(sessionDiv);
+    };
+  }
 }
 
 /**
  * FUNCTION
  * Loads in presenters for session dropdown
  */
-function loadPresenterDropdown() {
+function loadPresenterDropdown(dropdown) {
   var handler = "/presenterHandler/query";
   var xhr = new XMLHttpRequest();
 
@@ -63,7 +76,7 @@ function loadPresenterDropdown() {
       var result = JSON.parse(this.response);
 
       for (var i = 0; i < result.length; i++) {
-        var select = document.getElementById("presenter-select");
+        var select = document.getElementById(dropdown);
         var presenterID = result[i].presenterID;
         var name = result[i].name;
 
@@ -80,7 +93,7 @@ function loadPresenterDropdown() {
  * FUNCTION
  * Loads in rooms for session dropdown
  */
-function loadRoomDropdown() {
+function loadRoomDropdown(dropdown) {
   var handler = "/roomHandler/query";
   var xhr = new XMLHttpRequest();
 
@@ -89,7 +102,7 @@ function loadRoomDropdown() {
       var result = JSON.parse(this.response);
 
       for (var i = 0; i < result.length; i++) {
-        var select = document.getElementById("room-select");
+        var select = document.getElementById(dropdown);
         var roomID = result[i].roomID;
         var roomNumber = result[i].roomNumber;
 

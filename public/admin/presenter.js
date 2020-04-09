@@ -1,33 +1,3 @@
-// Display Presenters on page load
-getPresenters();
-
-// Presenter Items
-var presenterItems = document.getElementsByClassName("presenter-item");
-var i;
-for (i = 0; i < presenterItems.length; i++) {
-  var div = document.createElement("DIV");
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-
-  div.className = "presenter-item-options";
-  span.className = "close";
-  span.appendChild(txt);
-  div.appendChild(span);
-
-  presenterItems[i].appendChild(div);
-}
-
-// Close Presenter Item On Click
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var optionsDiv = this.parentElement;
-    var presenterItemDiv = optionsDiv.parentElement;
-    deletePresenter(presenterItemDiv);
-  };
-}
-
 // Presenter Form
 function openForm() {
   document.getElementById("presenterForm").style.display = "block";
@@ -36,63 +6,50 @@ function openForm() {
 function closeForm() {
   document.getElementById("name-input").value = "";
   document.getElementById("email-input").value = "";
+  document.getElementById("phone-input").value = "";
   document.getElementById("presenterForm").style.display = "none";
 }
 
-// Submit presenter information to DB
-function submitPresenter() {
-  var jsonOBJ = {
-    name: document.getElementById("name-input").value,
-    email: document.getElementById("email-input").value,
-    phone: document.getElementById("phone-input").value,
-  };
+function openEdit(presenterDiv) {
+  // Update values
+  document.getElementById("name-edit").value = presenterDiv.firstElementChild.innerHTML;
+  document.getElementById("email-edit").value = presenterDiv.getElementsByClassName("presenter-email")[0].innerHTML;
+  document.getElementById("phone-edit").value = presenterDiv.getElementsByClassName("presenter-phone")[0].innerHTML;
+  document.getElementById("id-edit").value = presenterDiv.id;
 
-  sendPostRequest(jsonOBJ, "/presenterHandler/insert");
+  // Open form
+  document.getElementById("presenterEditForm").style.display = "block";
+
+  // Disable add session buttion
+  var addButton = document.getElementById("add-presenter");
+  addButton.disabled = true;
+  addButton.classList.toggle("disabled");
 }
 
-// Deletes a presenter
-function deletePresenter(presenterDiv) {
-  presenterDiv.style.display = "none";
-  var infoDiv = presenterDiv.getElementsByClassName("presenter-item-info")[0];
+function closeEdit() {
+  // Update values
+  document.getElementById("name-edit").value = "";
+  document.getElementById("email-edit").value = "";
+  document.getElementById("phone-edit").value = "";
+  document.getElementById("presenterEditForm").style.display = "none";
 
-  var jsonOBJ = {
-    name: infoDiv.getElementsByClassName("presenter-name")[0].innerHTML,
-    email: infoDiv.getElementsByClassName("presenter-email")[0].innerHTML,
+  // Check add session button
+  var addButton = document.getElementById("add-presenter");
+  if (addButton.disabled === true) {
+    addButton.disabled = false;
+    addButton.classList.toggle("disabled");
   }
-
-  sendPostRequest(jsonOBJ, "presenterHandler/delete");
 }
 
-// Get presenters to display
-function getPresenters() {
-  var handler = "/presenterHandler/query";
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      result = JSON.parse(this.response);
-
-      for (var i = 0; i < result.length; i++) {
-        var name = result[i].name;
-        var email = result[i].email;
-        var phone = result[i].phone;
-
-        addPresenter(name, email, phone);
-      }
-    }
-  };
-
-  xhr.open("GET", handler);
-  xhr.send();
-}
-
-function addPresenter(name, email, phone) {
+function addPresenter(presenterID, name, email, phone) {
   // Create div to hold new presenter item
   var presenterDiv = document.createElement("div");
   presenterDiv.classList.add("presenter-item");
+  presenterDiv.classList.add("entry-item");
 
   // Create div to hold new room info
   var div = document.createElement("div");
+  div.id = presenterID;
   div.classList.add("presenter-item-info");
 
   // Create Presenter Name Info
@@ -143,11 +100,23 @@ function addPresenter(name, email, phone) {
   document.getElementById("presenter-list").appendChild(presenterDiv);
 
   // Add Close on click
-  for (i = 0; i < close.length; i++) {
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
     close[i].onclick = function () {
       var optionsDiv = this.parentElement;
       var presenterItemDiv = optionsDiv.parentElement;
       deletePresenter(presenterItemDiv);
+    };
+  }
+
+  // Edit Presenter Item On Click
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].onclick = function () {
+      var optionsDiv = this.parentElement;
+      var presenterItemDiv = optionsDiv.parentElement;
+      var presenterDiv = presenterItemDiv.firstElementChild;
+      openEdit(presenterDiv);
     };
   }
 }
