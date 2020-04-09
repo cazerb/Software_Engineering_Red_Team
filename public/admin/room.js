@@ -1,11 +1,55 @@
 function openForm() {
   document.getElementById("roomForm").style.display = "block";
+
+  // Disable add room buttion
+  var addButton = document.getElementById("add-room");
+  addButton.disabled = true;
+  addButton.classList.toggle("disabled");
+
+  // Disable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    close[i].disabled = true;
+    close[i].classList.toggle("disabled");
+  }
+
+  // Disable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].disabled = true;
+    editButton[i].classList.toggle("disabled");
+  }
 }
 
 function closeForm() {
   document.getElementById("room-input").value = "";
   document.getElementById("capacity-input").value = "";
   document.getElementById("roomForm").style.display = "none";
+
+  // Check add room button
+  var addButton = document.getElementById("add-room");
+  if (addButton.disabled === true) {
+    addButton.disabled = false;
+    addButton.classList.toggle("disabled");
+  }
+
+  // Enable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    if (close[i].disabled === true) {
+      close[i].disabled = false;
+      close[i].classList.toggle("disabled");
+    }
+  }
+
+  // Enable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    if (editButton[i].disabled === true) {
+      editButton[i].disabled = false;
+      editButton[i].classList.toggle("disabled");
+    }
+  }
 }
 
 function openEdit(roomDiv) {
@@ -127,7 +171,8 @@ function addRoom(roomID, number, capacity) {
   document.getElementById("room-list").appendChild(roomDiv);
 
   // Add Close on click
-  for (i = 0; i < close.length; i++) {
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
     close[i].onclick = function () {
       var optionsDiv = this.parentElement;
       var roomItemDiv = optionsDiv.parentElement;

@@ -4,12 +4,31 @@
  **********************************************************************
  */
 
- /**
+/**
  * FUNCTION
  * Opens session add-form
  */
 function openForm() {
   document.getElementById("sessionForm").style.display = "block";
+
+  // Disable add session button
+  var addButton = document.getElementById("add-session");
+  addButton.disabled = true;
+  addButton.classList.toggle("disabled");
+
+  // Disable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    close[i].disabled = true;
+    close[i].classList.toggle("disabled");
+  }
+
+  // Disable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    editButton[i].disabled = true;
+    editButton[i].classList.toggle("disabled");
+  }
 }
 
 /**
@@ -23,6 +42,31 @@ function closeForm() {
   document.getElementById("presenter-select").selectedIndex = 0;
   document.getElementById("room-select").selectedIndex = 0;
   document.getElementById("sessionForm").style.display = "none";
+
+  // Check add session button
+  var addButton = document.getElementById("add-session");
+  if (addButton.disabled === true) {
+    addButton.disabled = false;
+    addButton.classList.toggle("disabled");
+  }
+
+  // Enable delete buttons
+  var close = document.getElementsByClassName("close");
+  for (var i = 0; i < close.length; i++) {
+    if (close[i].disabled === true) {
+      close[i].disabled = false;
+      close[i].classList.toggle("disabled");
+    }
+  }
+
+  // Enable edit buttons
+  var editButton = document.getElementsByClassName("edit");
+  for (var i = 0; i < editButton.length; i++) {
+    if (editButton[i].disabled === true) {
+      editButton[i].disabled = false;
+      editButton[i].classList.toggle("disabled");
+    }
+  }
 }
 
 function openEdit(sessionDiv) {
@@ -30,9 +74,73 @@ function openEdit(sessionDiv) {
   document.getElementById("session-edit").value = sessionDiv.firstElementChild.innerHTML;
   document.getElementById("id-edit").value = sessionDiv.id;
 
-  // document.getElementById("end-edit").value = "";
-  // document.getElementById("presenter-edit").selectedIndex = 0;
-  // document.getElementById("room-edit").selectedIndex = 0;
+  // Update time
+  var currentTime = sessionDiv.getElementsByClassName("session-time")[0].innerHTML;
+  var startTime = currentTime.split(" - ")[0];
+  var endTime = currentTime.split(" - ")[1];
+
+  startTOD = startTime.split(" ")[1];
+  endTOD = endTime.split(" ")[1];
+
+  if (startTOD == "AM") {
+    startTime = startTime.split(" ")[0];
+    var correctedStart = startTime + ":00";
+
+    var startingNum = Number(startTime.split(":")[0]);
+
+    if (startingNum < 10) {
+      correctedStart = "0" + correctedStart;
+    }
+  }
+  else {
+    startTime = startTime.split(" ")[0];
+    var correctedStart = Number(startTime.split(":")[0]) + 12;
+    correctedStart =  String(correctedStart) + ":" + startTime.split(":")[1] + ":00";
+  }
+
+  if (endTOD == "AM") {
+    endTime = endTime.split(" ")[0];
+    var correctedEnd = endTime + ":00";
+
+    var startingNum = Number(endTime.split(":")[0]);
+
+    if (startingNum < 10) {
+      correctedEnd = "0" + correctedEnd;
+    }
+  }
+  else {
+    endTime = endTime.split(" ")[0];
+    var correctedEnd = Number(endTime.split(":")[0]) + 12;
+    correctedEnd =  String(correctedEnd) + ":" + endTime.split(":")[1] + ":00";
+  }
+  console.log(correctedStart);
+  console.log(correctedEnd);
+
+  document.getElementById("start-edit").value = correctedStart;
+  document.getElementById("end-edit").value = correctedEnd;
+
+  var currentPresenter = sessionDiv.getElementsByClassName("session-presenter")[0].innerHTML;
+
+  var currentRoom = sessionDiv.getElementsByClassName("session-room")[0].innerHTML;
+  currentRoom = currentRoom.split("#: ")[1];
+
+  // get the index that matches current presenter
+  var presenterSelect = document.getElementById("presenter-edit");
+  for (var i = 0; i < presenterSelect.options.length; i++) {
+    if (presenterSelect.options[i].text === currentPresenter) {
+      presenterSelect.selectedIndex = i;
+      break;
+    }
+  }
+
+  // get the index that matches current room
+  var roomSelect = document.getElementById("room-edit");
+  for (var i = 0; i < roomSelect.options.length; i++) {
+    if (roomSelect.options[i].text === currentRoom) {
+      roomSelect.selectedIndex = i;
+      break;
+    }
+  }
 
   // Open form
   document.getElementById("sessionEditForm").style.display = "block";
@@ -112,7 +220,7 @@ function createSessionDiv(sessionID, sessionName) {
   // Append Info to div
   sessionInfo.appendChild(session);
 
-  // Create Count options div  
+  // Create Count options div
   var optionsDiv = document.createElement("DIV");
   var edit = document.createElement("button");
   var editText = document.createTextNode("EDIT");
@@ -136,7 +244,7 @@ function createSessionDiv(sessionID, sessionName) {
   // Add Close on click
   var close = document.getElementsByClassName("close");
   for (var i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
+    close[i].onclick = function () {
       var optionsDiv = this.parentElement;
       var sessionItemDiv = optionsDiv.parentElement;
       deleteSession(sessionItemDiv);
@@ -150,6 +258,7 @@ function createSessionDiv(sessionID, sessionName) {
       var optionsDiv = this.parentElement;
       var sessionItemDiv = optionsDiv.parentElement;
       var sessionDiv = sessionItemDiv.firstElementChild;
+      console.log(sessionDiv);
       openEdit(sessionDiv);
     };
   }
@@ -159,33 +268,34 @@ function addSessionTime(sessionID, startTime, endTime) {
   // Create Session Time Info
   var sessionTime = document.createElement("p");
 
-  if ((startTime === "00:00:00" || startTime === null) && (endTime === "00:00:00" || endTime === null)) {
+  if (
+    (startTime === "00:00:00" || startTime === null) &&
+    (endTime === "00:00:00" || endTime === null)
+  ) {
     var timeText = document.createTextNode("No Time Set");
     sessionTime.classList.add("null-text");
-  }
-  else {
+  } else {
     startTime = startTime.split(":")[0] + ":" + startTime.split(":")[1];
-    startTime = startTime.replace(/^0+/, '');
+    startTime = startTime.replace(/^0+/, "");
     var leadingStart = startTime.split(":")[0];
 
     endTime = endTime.split(":")[0] + ":" + endTime.split(":")[1];
-    endTime = endTime.replace(/^0+/, '');
+    endTime = endTime.replace(/^0+/, "");
     var leadingEnd = endTime.split(":")[0];
 
     if (leadingStart > 12) {
       leadingStart = leadingStart - 12;
-      var correctedStartTime = leadingStart + ":" + startTime.split(":")[1] + " PM"
+      var correctedStartTime =
+        leadingStart + ":" + startTime.split(":")[1] + " PM";
+    } else {
+      var correctedStartTime = startTime + " AM";
     }
-    else {
-      var correctedStartTime = startTime + " AM"
-    }
-    
+
     if (leadingEnd > 12) {
       leadingEnd = leadingEnd - 12;
-      var correctedEndTime = leadingEnd + ":" + endTime.split(":")[1] + " PM"
-    }
-    else {
-      var correctedEndTime = endTime + " AM"
+      var correctedEndTime = leadingEnd + ":" + endTime.split(":")[1] + " PM";
+    } else {
+      var correctedEndTime = endTime + " AM";
     }
 
     var timeText = document.createTextNode(
@@ -193,6 +303,7 @@ function addSessionTime(sessionID, startTime, endTime) {
     );
   }
   sessionTime.appendChild(timeText);
+  sessionTime.classList.add("session-time");
   sessionInfoDiv = document.getElementById(sessionID).appendChild(sessionTime);
 }
 
@@ -219,9 +330,12 @@ function addSessionPresenter(sessionID, presenterID) {
         selectedPresenter = document.createTextNode("No Presenter Set");
         presenter.classList.add("null-text");
       }
+      presenter.classList.add("session-presenter");
       presenter.appendChild(selectedPresenter);
 
-      sessionInfoDiv = document.getElementById(sessionID).appendChild(presenter);
+      sessionInfoDiv = document
+        .getElementById(sessionID)
+        .appendChild(presenter);
     }
   };
 
@@ -252,6 +366,7 @@ function addSessionRoom(sessionID, roomID) {
         selectedRoom = document.createTextNode("No Room Set");
         room.classList.add("null-text");
       }
+      room.classList.add("session-room");
       room.appendChild(selectedRoom);
       sessionInfoDiv = document.getElementById(sessionID).appendChild(room);
     }

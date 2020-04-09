@@ -47,18 +47,16 @@ router.post('/update', function(req, res) {
 
     sql.query(`UPDATE rooms SET roomNumber="${roomNumber}", capacity="${capacity}" WHERE roomID="${roomID}"`, function(err,result,field) {
         if(err) {
-            console.log("FAILED")
-            res.send("FAILED");
+            res.send("FAILED TO UPDATE ROOM");
         }
         else {
-            console.log("SUCCESS")
-            res.send("SUCCESS");
+            res.send("UPDATED ROOM");
         }
     });
 })
 
 router.get('/query', function(req, res) {
-    sql.query("SELECT * FROM rooms", function(err,result,fields) {
+    sql.query("SELECT * FROM rooms ORDER BY roomNumber ASC", function(err,result,fields) {
         String(result);
         res.send(result);
     })
